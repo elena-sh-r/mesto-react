@@ -104,8 +104,10 @@ class Api {
   }
 }
 
-export default new Api({
-  address: 'https://nomoreparties.co',
-  groupId: `cohort0`,
-  token: `80a75492-21c5-4330-a02f-308029e94b63`,
-})
+const api = new Api({
+  address: 'https://mesto.nomoreparties.co',
+  groupId: `cohort-21`,
+  token: `dc0ca2fb-4ae3-45bf-a776-2cc27f547133`,
+});
+
+export default api;
