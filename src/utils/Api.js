@@ -105,9 +105,9 @@ class Api {
 }
 
 const api = new Api({
-  address: 'https://mesto.nomoreparties.co',
-  groupId: `cohort-21`,
-  token: `dc0ca2fb-4ae3-45bf-a776-2cc27f547133`,
+  url: 'https://mesto.nomoreparties.co',
+  token: 'dc0ca2fb-4ae3-45bf-a776-2cc27f547133',
+  cohortId: 'cohort-21',
 });
 
 export default api;
