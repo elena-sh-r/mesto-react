@@ -5,11 +5,11 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import Footer from './Footer';
 
-function App(props) {
+function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState();
+  const [selectedCard, setSelectedCard] = useState(null);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -42,11 +42,11 @@ function App(props) {
       <PopupWithForm isOpened={isEditProfilePopupOpen} onClose={closeAllPopups} title="Редактировать профиль" name="profile" children={
         <>
           <label className="popup__field">
-            <input className="popup__input popup__input_type_name" name="name" type="text" id="name-input" minLength="2" maxLength="40" required/>
+            <input className="popup__input popup__input_type_name" name="name" type="text" id="name-input" minLength="2" maxLength="40" placeholder="Имя" required/>
             <span className="name-input-error popup__input-error popup__input-error_type_name"></span>
           </label>
           <label className="popup__field">
-            <input className="popup__input popup__input_type_about" name="about" type="text" id="about-input" minLength="2" maxLength="200" required/>
+            <input className="popup__input popup__input_type_about" name="about" type="text" id="about-input" minLength="2" maxLength="200" placeholder="Описание" required/>
             <span className="about-input-error popup__input-error popup__input-error_type_about"></span>
           </label>
         </>

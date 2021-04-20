@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Footer(props) {
+function Footer() {
   return (
     <footer className="footer">
-      <p>&copy; 2021 Mesto Russia</p>
+      <p>&copy; {new Date().getFullYear()} Mesto Russia</p>
     </footer>
   );
 }

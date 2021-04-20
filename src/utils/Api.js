@@ -1,5 +1,5 @@
 class Api {
-  constructor(url, token, cohortId) {
+  constructor({url, token, cohortId}) {
     this._apiUrl = `${url}/v1/${cohortId}`;
     this._token = token;
   }
@@ -10,13 +10,7 @@ class Api {
         authorization: this._token
       }
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(res => this._checkResponse(res));
   }
 
   setOwnerInfo(name, about) {
@@ -31,13 +25,7 @@ class Api {
         about: about
       })  
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   getCards() {
@@ -46,13 +34,7 @@ class Api {
         authorization: this._token
       }
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   setCard(name, link) {
@@ -67,13 +49,7 @@ class Api {
         link: link
       })
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   deleteCard(id) {
@@ -83,13 +59,7 @@ class Api {
         authorization: this._token
       }
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   setCardLike(id) {
@@ -99,13 +69,7 @@ class Api {
         authorization: this._token
       }
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   deleteCardLike(id) {
@@ -115,13 +79,7 @@ class Api {
         authorization: this._token
       }
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
   setAvatar(avatar) {
@@ -135,18 +93,21 @@ class Api {
         avatar: avatar
       })
     })
-    .then((res) => {
-      if (this._isValidResult(res)) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkResponse);
   }
 
-  _isValidResult(res) {
-    return res.ok;
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
 
-export default new Api ('https://mesto.nomoreparties.co', 'dc0ca2fb-4ae3-45bf-a776-2cc27f547133', 'cohort-21');
+const api = new Api({
+  address: 'https://nomoreparties.co',
+  groupId: `cohort0`,
+  token: `80a75492-21c5-4330-a02f-308029e94b63`,
+});
+
+export default api;

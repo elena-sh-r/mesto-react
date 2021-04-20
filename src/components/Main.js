@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import Api from '../utils/Api';
+import Api from '../utils/api';
 import Card from './Card';
 
-function Main(props) {
-  const [userName, setUserName] = useState();
-  const [userDescription, setUserDescription] = useState();
-  const [userAvatar, setUserAvatar] = useState();
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -19,25 +19,25 @@ function Main(props) {
     .catch((err) => {
       console.log(err);
     });
-  });
+  }, []);
 
   return (
     <main className="content">
       <section className="profile"> 
-        <div className="profile__avatar-container" onClick={props.onEditAvatar}>
+        <div className="profile__avatar-container" onClick={onEditAvatar}>
           <img className="profile__avatar" alt="Аватар" src={userAvatar}/>
         </div>
         <div className="profile__profile-info">
           <h1 className="profile__name">{userName}</h1>
-          <button className="profile__edit-button" type="button" onClick={props.onEditProfile}/>
+          <button className="profile__edit-button" type="button" onClick={onEditProfile}/>
           <p className="profile__about">{userDescription}</p>
         </div>
-        <button className="profile__add-button" type="button" onClick={props.onAddPlace}/>
+        <button className="profile__add-button" type="button" onClick={onAddPlace}/>
       </section>
       
       <section className="elements">
         {
-          cards && cards.map((card, index) => <Card card={card} key={index} onCardClick={props.onCardClick}/>)
+          cards.map((card) => (<Card card={card} key={card._id} onCardClick={onCardClick}/>))
         }
       </section>
     </main>
