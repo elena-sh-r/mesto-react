@@ -82,6 +82,14 @@ class Api {
     .then(this._checkResponse);
   }
 
+  changeLikeCardStatus(id, isLiked) {
+    if(isLiked) {
+      return this.setCardLike(id);
+    } else {
+      return this.deleteCardLike(id);
+    }
+  }
+
   setAvatar(avatar) {
     return fetch(`${this._apiUrl}/users/me/avatar`, {
       method: 'PATCH',
@@ -106,8 +114,8 @@ class Api {
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co',
-  token: 'dc0ca2fb-4ae3-45bf-a776-2cc27f547133',
-  cohortId: 'cohort-21',
+  token: 'c8082a6e-4367-4fd0-bc5f-dacd70da1e5b',
+  cohortId: 'cohort-23',
 });
 
 export default api;
