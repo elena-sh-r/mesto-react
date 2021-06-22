@@ -61,12 +61,9 @@ function App() {
 
   function handleUpdateUser({name, about}) {
     api.setOwnerInfo(name, about)
-      .then(() => {
-        setCurrentUser({
-          ...currentUser,
-          name,
-          about,
-        });
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -75,11 +72,9 @@ function App() {
 
   function handleUpdateAvatar({avatar}) {
     api.setAvatar(avatar)
-      .then(() => {
-        setCurrentUser({
-          ...currentUser,
-          avatar,
-        });
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -115,6 +110,7 @@ function App() {
     api.setCard(name, link)
       .then((newCard) => {
         setCards([newCard, ...cards]);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
